@@ -67,5 +67,4 @@ public class Comment {
 		this.text = text;
 	}
 	
-
 }
