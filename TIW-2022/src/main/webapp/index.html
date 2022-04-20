@@ -1,6 +1,30 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+    <title>Login Page</title>
 </head>
 <body>
+    <section class="login_section">
+    <section class="login_section_content">
+    <h1>Welcome <br/> Back!</h1>
+	<form action="CheckLogin" method="POST">
+		<span class="bold">Username</span><br/> <input class="input" type="text" name="username" required> <br>
+		<span class="bold">Password</span><br/> <input class="input" type="password" name="pwd" required><br>
+		<input type="submit" value="Sign in" class="login_section_content_button">
+		<p th:text=" ${errorMsg}"></p>
+	</form>
+    <p>No account? <a href="#">Register here</a></p>
+    </section>
+    <section class="login_section_image">
+        <h1>Find out the best <br/> photos in the World!</h1>
+    </section>
+    </section>
 </body>
 </html>
