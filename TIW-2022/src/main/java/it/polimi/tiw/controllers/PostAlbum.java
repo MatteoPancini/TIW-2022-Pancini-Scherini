@@ -9,10 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import it.polimi.tiw.dao.AlbumDAO;
-import it.polimi.tiw.utils.TemplateEngineHandler;
+import it.polimi.tiw.utils.ConnectionHandler;
 
 /**
  * Servlet implementation class PostAlbum
@@ -32,14 +31,13 @@ public class PostAlbum extends HttpServlet {
     }
 
     public void init() throws ServletException {
-    	connection = TemplateEngineHandler.connectionInit(getServletContext());
+    	connection = ConnectionHandler.getConnection(getServletContext());
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
 		AlbumDAO albumDAO = new AlbumDAO(connection);
 		

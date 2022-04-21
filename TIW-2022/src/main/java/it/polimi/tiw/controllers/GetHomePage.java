@@ -1,5 +1,6 @@
 package it.polimi.tiw.controllers;
 
+import it.polimi.tiw.utils.ConnectionHandler;
 import it.polimi.tiw.utils.TemplateEngineHandler;
 
 import it.polimi.tiw.beans.Album;
@@ -10,7 +11,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +41,9 @@ public class GetHomePage extends HttpServlet {
     }
 
     
-    public void init() {
-    	connection = TemplateEngineHandler.connectionInit(getServletContext());
-        templateEngine = TemplateEngineHandler.templateEngineInit(getServletContext());
+    public void init() throws ServletException {
+    	connection = ConnectionHandler.getConnection(getServletContext());
+        templateEngine = TemplateEngineHandler.getEngine(getServletContext());
     }
     
     

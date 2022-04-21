@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.UnavailableException;
 
+
 public class ConnectionHandler {
 
 	public static Connection getConnection(ServletContext context) throws UnavailableException {
