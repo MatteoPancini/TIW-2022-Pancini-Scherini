@@ -2,59 +2,59 @@ package it.polimi.tiw.beans;
 
 public class Comment {
 	
-	private int commentID;
-	private int imageID;
-	private int albumID;
-	private int userID;
+	private int idComment;
+	private int idImage;
+	private int idAlbum;
+	private int idUser;
 	private String text;
 	
-
-	public Comment(int commentID, int imageID, int albumID, int userID, String text) {
-		this.commentID = commentID;
-		this.imageID = imageID;
-		this.albumID = albumID;
-		this.userID = userID;
+	
+	public Comment(int idComment, int idImage, int idAlbum, int idUser, String text) {
+		this.idComment = idComment;
+		this.idImage = idImage;
+		this.idAlbum = idAlbum;
+		this.idUser = idUser;
 		this.text = text;
 	}
 
 
-	public int getCommentID() {
-		return commentID;
+	public int getIdComment() {
+		return idComment;
 	}
 
 
-	public void setCommentID(int commentID) {
-		this.commentID = commentID;
+	public void setIdComment(int idComment) {
+		this.idComment = idComment;
 	}
 
 
-	public int getImageID() {
-		return imageID;
+	public int getIdImage() {
+		return idImage;
 	}
 
 
-	public void setImageID(int imageID) {
-		this.imageID = imageID;
+	public void setIdImage(int idImage) {
+		this.idImage = idImage;
 	}
 
 
-	public int getAlbumID() {
-		return albumID;
+	public int getIdAlbum() {
+		return idAlbum;
 	}
 
 
-	public void setAlbumID(int albumID) {
-		this.albumID = albumID;
+	public void setIdAlbum(int idAlbum) {
+		this.idAlbum = idAlbum;
 	}
 
 
-	public int getUserID() {
-		return userID;
+	public int getIdUser() {
+		return idUser;
 	}
 
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 
