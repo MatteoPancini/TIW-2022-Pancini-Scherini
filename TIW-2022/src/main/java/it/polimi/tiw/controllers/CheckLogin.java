@@ -20,13 +20,13 @@ import it.polimi.tiw.dao.UserDAO;
 import it.polimi.tiw.utils.ConnectionHandler;
 import it.polimi.tiw.utils.TemplateEngineHandler;
 
+
 @WebServlet("/CheckLogin")
-public class CheckLogin extends HttpServlet {
+public class CheckLogin extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private Connection connection = null;
 	private TemplateEngine templateEngine;
-
-
+	
 	public CheckLogin() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -34,18 +34,19 @@ public class CheckLogin extends HttpServlet {
 
 	public void init() throws ServletException{
 		connection = ConnectionHandler.getConnection(getServletContext());
-		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
+        //templateEngine = TemplateEngineHandler.getEngine(getServletContext());
+        System.out.println("fine init");
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		String username = null;
 		String password = null;
-	
+		
 		try {
 			username = StringEscapeUtils.escapeJava(request.getParameter("username"));
-			password = StringEscapeUtils.escapeJava(request.getParameter("password"));
-	
+			password = StringEscapeUtils.escapeJava(request.getParameter("pwd"));
+
 			if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
 				throw new Exception("Missing or empty credential value");
 			}
@@ -54,10 +55,14 @@ public class CheckLogin extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
 			return;
 		}
-	
+		
+		System.out.println(username+password);
+
+		
 		UserDAO userDao = new UserDAO(connection);
 		User user = null;
-	
+		
+		
 		try {
 			user = userDao.checkLoginCredentials(username, password);
 		} catch (SQLException e) {
@@ -66,7 +71,6 @@ public class CheckLogin extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not Possible to check credentials");
 			return;
 		}
-	
 		String path;
 		if (user == null) {
 			ServletContext servletContext = getServletContext();
@@ -76,7 +80,8 @@ public class CheckLogin extends HttpServlet {
 			templateEngine.process(path, webcontext, response.getWriter());
 		} else {
 			request.getSession().setAttribute("user", user);
-			path = getServletContext().getContextPath() + "/WEB-INF/index.html";
+			System.out.println(request.getSession().getAttribute("user"));
+			path = getServletContext().getContextPath() + "/GetHomePage";
 			response.sendRedirect(path);
 		}
 	}
@@ -90,7 +95,4 @@ public class CheckLogin extends HttpServlet {
 			}
 		}
 	}
-	
-	
-
 }
