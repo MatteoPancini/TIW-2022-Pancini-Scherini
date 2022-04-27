@@ -34,8 +34,7 @@ public class CheckLogin extends HttpServlet{
 
 	public void init() throws ServletException{
 		connection = ConnectionHandler.getConnection(getServletContext());
-        //templateEngine = TemplateEngineHandler.getEngine(getServletContext());
-        System.out.println("fine init");
+        templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -56,8 +55,6 @@ public class CheckLogin extends HttpServlet{
 			return;
 		}
 		
-		System.out.println(username+password);
-
 		
 		UserDAO userDao = new UserDAO(connection);
 		User user = null;
@@ -80,7 +77,6 @@ public class CheckLogin extends HttpServlet{
 			templateEngine.process(path, webcontext, response.getWriter());
 		} else {
 			request.getSession().setAttribute("user", user);
-			System.out.println(request.getSession().getAttribute("user"));
 			path = getServletContext().getContextPath() + "/GetHomePage";
 			response.sendRedirect(path);
 		}

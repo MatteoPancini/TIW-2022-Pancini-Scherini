@@ -89,6 +89,11 @@ body {
     margin-top: 0;
 }
 
+.login_error{
+    color: red;
+    font-size: 0.8rem;
+}
+
 @media screen and (max-width: 1000px) {
     .login_section_content {
         display: grid;

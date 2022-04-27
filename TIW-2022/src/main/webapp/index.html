@@ -18,7 +18,7 @@
 		<span class="bold">Username</span><br/> <input class="input" type="text" name="username" required> <br>
 		<span class="bold">Password</span><br/> <input class="input" type="password" name="pwd" required><br>
 		<input type="submit" value="Sign in" class="login_section_content_button">
-		<p th:text=" ${errorMsg}"></p>
+		<p class="login_error" th:text=" ${errorMsg}"></p>
 	</form>
     <p>No account? <a href="#">Register here</a></p>
     </section>
