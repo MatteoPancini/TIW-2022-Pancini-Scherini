@@ -28,7 +28,7 @@ public class UserDAO {
 				else {
 					result.next();
 					User user = new User();
-					user.setUserID(result.getInt("idUser"));
+					user.setIdUser(result.getInt("idUser"));
 					user.setUsername(result.getString("username"));
 					user.setEmail(result.getString("email"));
 					return user;

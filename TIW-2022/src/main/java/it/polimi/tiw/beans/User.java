@@ -2,26 +2,26 @@ package it.polimi.tiw.beans;
 
 public class User {
 	
-	private int userID;
+	private int idUser;
 	private String username;
 	private String email;
 	private String password;
 	
 	public User() {}
 	
-	public User(int userID, String username, String email, String password) {
-		this.userID = userID;
+	public User(int idUser, String username, String email, String password) {
+		this.idUser = idUser;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
 	
-	public int getUserID() {
-		return userID;
+	public int getIdUser() {
+		return idUser;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setIdUser(int userID) {
+		this.idUser = userID;
 	}
 
 	public String getUsername() {

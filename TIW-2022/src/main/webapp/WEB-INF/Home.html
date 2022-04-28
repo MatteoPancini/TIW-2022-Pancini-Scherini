@@ -1,7 +1,93 @@
-<html>
-<head>
-</head>
-<body>
-<p>Hello user</p>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./css/homepage_style.css">
+        
+     
+        <title>Home Page</title>
+    </head>
+
+    <body>
+        <header>
+            <a class="logo" href="tryhomepage.html">Home Page</a>
+            
+            <a class="logout" href="index.html">Logout</a>            
+        
+
+        </header>
+
+        <div class="album">
+            <div class="albumTag">
+                <h2>Your Albums</h2>
+            </div>
+            
+            <table class="albumList-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Album Name</th>
+                        <th>User</th>
+                        <th>Creation Date</th>
+                    </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                    <tr th:each="album : ${userAlbumList}">
+                        <td th:text="${album.getTitle()}">
+                            <a th:href="@{/GetAlbumPage(album=${album.getAlbumId()}, page=0)}">Cats Album</a>
+                        </td>
+                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getCreationDate().toString().substring(0, 11)}">21/02/2022</td>
+                    </tr>
+                    <tr>
+                        <td>Casual Album</td>
+                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getCreationDate().toString().substring(0, 11)}">22/02/2022</td>
+                    </tr>
+                </tbody>
+                
+            </table>
+            
+        </div>
+
+        <div class="spaceNewAlbum">
+            <a class="createAlbum" href="newalbumform.html">
+                    Create new album
+
+            </a>
+
+        </div>
+
+        <div class="album">
+            <div class="albumTag">
+                <h2>Albums from the community</h2>
+                
+            </div>
+            
+            <table class="albumList-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Album Name</th>
+                        <th>User</th>
+                        <th>Creation Date</th>
+                    </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                    <tr th:each="album : ${otherUserAlbumList}">
+                        <td th:text="${album.getTitle()}">
+                            <a th:href="@{/GetAlbumPage(album=${album.getAlbumId()}, page=0)}">Cats Album</a>
+                        </td>
+                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getCreationDate().toString().substring(0, 11)}">21/02/2022</td>
+                    </tr>
+                    <tr>
+                        <td>Casual Album</td>
+                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getCreationDate().toString().substring(0, 11)}">22/02/2022</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+    </body>
