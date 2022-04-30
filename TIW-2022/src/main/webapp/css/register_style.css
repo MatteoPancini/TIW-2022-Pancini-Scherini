@@ -1,0 +1,72 @@
+:root {
+    --primary-color: #eee;
+    --secondary-color: #6111ff;
+    --link-color: #6111ff;
+    --grey-shade: #616161;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background-image: url("../img/login_image.png");
+    background-size: cover;
+    height: 100%;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.register_form_section{
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 50%;
+    margin: 0 25%;
+}
+
+h1{
+    margin: 0;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.register_form{
+    width: 70%;
+    margin: 30px 15%;
+}
+
+.input {
+    border: none;
+    border-bottom: 2px solid var(--grey-shade);
+    font-size: 18px;
+    padding: 15px 0px 2px 0px;
+    width: 100%;
+    margin: 10px 0 40px 0;
+    background-color: var(--primary-color);
+    color: var(--grey-shade);
+}
+
+.input:focus {
+    outline: none;
+}
+
+.register_section_button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 0;
+    font-size: 22px;
+    padding: 1rem 0 1rem;
+    border-radius: 15px;
+    width: 100%;
+    margin: 15px 0 0 0;
+    cursor: pointer;
+    transition: all 0.15s ease-in;
+    text-align: center;
+}
+
+.register_section_button:hover {
+    background-color: #af0dfd;
+    transition: all 0.15s ease-in;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/register_style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+        <title>Register Page</title>
+    </head>
+<body>
+    <section class="register_form_section">
+        <h1>Create new Account </h1>
+        <form action="CreateAccount" method="POST" class="register_form">
+            <span class="bold">Email</span><br/> <input class="input" type="text" name="email" required> <br>
+            <span class="bold">Username</span><br/> <input class="input" type="text" name="username" required> <br>
+            <span class="bold">Password</span><br/> <input class="input" type="password" name="pwd" required><br>
+            <span class="bold">Confirm Password</span><br/> <input class="input" type="password" name="confirmed_pwd" required><br>
+            <input type="submit" value="Register" class="register_section_button">
+            <p class="register_error" th:text=" ${errorMsg}"></p>
+        </form>
+    </section>
+</body>
+</html>

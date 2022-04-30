@@ -71,7 +71,7 @@ public class GetHomePage extends HttpServlet {
         return;
       }
       
-      String homePath = "/WEB-INF/Home.html"; //TODO: QUI CI VA IL PATH DELLA HOMEPAGE
+      String homePath = "/WEB-INF/home.html"; //TODO: QUI CI VA IL PATH DELLA HOMEPAGE
       WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
       webContext.setVariable("userAlbumList", userAlbumList);
       webContext.setVariable("otherUserAlbumList", otherUserAlbumList);
