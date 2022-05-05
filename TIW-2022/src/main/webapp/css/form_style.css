@@ -1,0 +1,80 @@
+* {
+    font-family: "Roboto", sans-serif;
+    font-size: 100;
+    font-weight: 300;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.newElementButton {
+    background-color: #6111ff;
+    color: #eee;
+    border: 0;
+    font-size: 22px;
+    padding: 1rem 0 1rem;
+    border-radius: 15px;
+    width: 80%;
+    margin: 0;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.15s ease-in;
+}
+  
+.newElementButton:hover {
+    background-color: #af0dfd;
+    transition: all 0.15s ease-in;
+}
+  
+h1 {
+    font-size: 40px;
+    margin-top: 0;
+    text-align: center;
+    padding-bottom: 40px;
+}
+  
+.formContent {
+    text-align: center;
+    width: 50%;
+    background-color: white;
+    padding: 10px;
+    margin-left: 25%;
+    height: 100vh;
+  }
+
+
+  .createButton {
+    padding-top: 40px;
+  }
+
+  .input {
+    border: none;
+    border-bottom: 2px solid #616161;
+    width: 80%;
+  }
+
+  body {
+    background-image: url('../img/login_image.png');
+    background-size: cover;
+    width: 100%;
+  }
+
+  .input:focus {
+    border: none;
+    border-bottom: 2px solid #616161;
+    transition: all 0.15s ease-in;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+
+  }
+
+
+  
+
+  @media screen and (max-width: 1000px) {
+    .column {
+      width: 100%;
+    }
+  }

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
  <context-param>
     <param-name>dbUrl</param-name>
     <param-value>jdbc:mysql://127.0.0.1:3306/dbfinalproject?serverTimezone=UTC</param-value>
@@ -23,9 +20,12 @@
   	<filter-name>UserChecker</filter-name>
     <filter-class>it.polimi.tiw.filters.UserChecker</filter-class> 
   </filter>
-  <filter-mapping> 
+   <filter-mapping> 
     <filter-name>UserChecker</filter-name> 
     <url-pattern>/GetHomePage</url-pattern> 
     <url-pattern>/PostAlbum</url-pattern> 
  </filter-mapping> 
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 </web-app>

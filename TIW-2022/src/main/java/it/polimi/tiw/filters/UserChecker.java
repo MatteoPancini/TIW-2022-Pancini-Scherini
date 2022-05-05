@@ -3,20 +3,18 @@ package it.polimi.tiw.filters;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
+import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/AdminChecker")
-public class UserChecker extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+public class UserChecker implements Filter {       
 	
 	public UserChecker() {
 		// TODO Auto-generated method stub
@@ -29,10 +27,10 @@ public class UserChecker extends HttpServlet {
 	}
 
     
-	protected void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
 			throws ServletException, IOException {
 		
-		System.out.println("filter");
+		System.out.println("filtering request");
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -43,6 +41,8 @@ public class UserChecker extends HttpServlet {
 			res.sendRedirect(loginpath);
 			return;
 		}
+		chain.doFilter(request, response);
+
 	}
 	
 	public void destroy() {

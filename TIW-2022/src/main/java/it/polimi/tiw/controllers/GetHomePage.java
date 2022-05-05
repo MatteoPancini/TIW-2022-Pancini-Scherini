@@ -43,45 +43,33 @@ public class GetHomePage extends HttpServlet {
       templateEngine = TemplateEngineHandler.getEngine(getServletContext());
     }
     
-    
-  /**
-   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-   */
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession(false);
-    /*if (session == null || session.getAttribute("user") == null) {
-      String path = getServletContext().getContextPath();
-      response.sendRedirect(path);
-    }
-    else {*/
     
-      List<Album> userAlbumList = null;
-      List<Album> otherUserAlbumList = null;
+    List<Album> userAlbumList = null;
+    List<Album> otherUserAlbumList = null;
       
-      AlbumDAO albumDAO = new AlbumDAO(connection);
-      int userId = ((User) session.getAttribute("user")).getIdUser();
+    AlbumDAO albumDAO = new AlbumDAO(connection);
+    int userId = ((User) session.getAttribute("user")).getIdUser();
       
-      try {
-        userAlbumList = albumDAO.findUserAlbums(userId);
-        otherUserAlbumList = albumDAO.findOtherAlbums(userId);
+    try {
+      userAlbumList = albumDAO.findUserAlbums(userId);
+      otherUserAlbumList = albumDAO.findOtherAlbums(userId);
 
-      } catch(SQLException e) {
-        e.printStackTrace();
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error in retrieving the album list!");
-        return;
-      }
+    } catch(SQLException e) {
+      e.printStackTrace();
+      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error in retrieving the album list!");
+      return;
+    }
       
-      String homePath = "/WEB-INF/home.html"; //TODO: QUI CI VA IL PATH DELLA HOMEPAGE
-      WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
-      webContext.setVariable("userAlbumList", userAlbumList);
-      webContext.setVariable("otherUserAlbumList", otherUserAlbumList);
-      templateEngine.process(homePath, webContext, response.getWriter());
-    //}
-    
+    String homePath = "/WEB-INF/home.html";
+    WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+    webContext.setVariable("userAlbumList", userAlbumList);
+    webContext.setVariable("otherUserAlbumList", otherUserAlbumList);
+    templateEngine.process(homePath, webContext, response.getWriter()); 
   }
 
-  
-  
   
   @Override
   public void destroy() {

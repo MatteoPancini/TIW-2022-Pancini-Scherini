@@ -70,3 +70,11 @@ h1{
     background-color: #af0dfd;
     transition: all 0.15s ease-in;
 }
+
+@media screen and (max-width: 1000px) {
+    .register_form_section {
+        height: 100%;
+    	width: 100%;
+    	margin: 0;
+    }
+}

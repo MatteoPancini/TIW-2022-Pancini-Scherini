@@ -66,6 +66,8 @@ public class CreateAccount extends HttpServlet {
 		if(badRequest == true) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing or incorrect parameters");
 		}
+		
+		System.out.println("New user email: "+email+" username: "+username+" isPswEquals: "+password.equals(confirmedPassword));
 				
 		UserDAO userDAO = new UserDAO(connection);
 		try {
@@ -96,6 +98,7 @@ public class CreateAccount extends HttpServlet {
 		
 	}
 	
+	@Override
 	public void destroy() {
 		if (connection != null) {
 			try {
