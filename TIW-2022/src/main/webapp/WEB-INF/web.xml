@@ -19,4 +19,13 @@
     <param-name>dbDriver</param-name>
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
+  <filter> 
+  	<filter-name>UserChecker</filter-name>
+    <filter-class>it.polimi.tiw.filters.UserChecker</filter-class> 
+  </filter>
+  <filter-mapping> 
+    <filter-name>UserChecker</filter-name> 
+    <url-pattern>/GetHomePage</url-pattern> 
+    <url-pattern>/PostAlbum</url-pattern> 
+ </filter-mapping> 
 </web-app>

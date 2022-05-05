@@ -49,11 +49,11 @@ public class GetHomePage extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession(false);
-    if (session == null || session.getAttribute("user") == null) {
+    /*if (session == null || session.getAttribute("user") == null) {
       String path = getServletContext().getContextPath();
       response.sendRedirect(path);
     }
-    else {
+    else {*/
     
       List<Album> userAlbumList = null;
       List<Album> otherUserAlbumList = null;
@@ -76,7 +76,7 @@ public class GetHomePage extends HttpServlet {
       webContext.setVariable("userAlbumList", userAlbumList);
       webContext.setVariable("otherUserAlbumList", otherUserAlbumList);
       templateEngine.process(homePath, webContext, response.getWriter());
-    }
+    //}
     
   }
 

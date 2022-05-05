@@ -37,6 +37,13 @@ public class CheckLogin extends HttpServlet{
         templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String path = "/index.html";
+		 WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+	     templateEngine.process(path, webContext, response.getWriter());
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		String username = null;
