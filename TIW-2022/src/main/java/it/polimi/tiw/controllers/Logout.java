@@ -32,9 +32,8 @@ public class Logout extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
-		String loginpath = request.getServletContext().getContextPath() + "/index.html";
-	    WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
-	    templateEngine.process(loginpath, webContext, response.getWriter()); 
+		String path = "/index.html";
+		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+	    templateEngine.process(path, webContext, response.getWriter());
 	}
-
 }

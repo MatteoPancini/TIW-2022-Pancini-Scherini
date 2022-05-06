@@ -40,8 +40,8 @@ public class CheckLogin extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		String path = "/index.html";
-		 WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
-	     templateEngine.process(path, webContext, response.getWriter());
+		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+	    templateEngine.process(path, webContext, response.getWriter());
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 

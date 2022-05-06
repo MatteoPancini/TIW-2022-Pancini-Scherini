@@ -8,28 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
-    <title>Login Page</title>
+    <title>Create new album</title>
 </head>
-<body>
-        
- 
-        
+	<body>   
         <div class="formContent">
-            <h1>Create new Album</h1>
+        <h1>Create new Album</h1>  
+        <div class="form_content_inner">
             <form th:action="PostAlbum" method="POST">
-                <div class="title">Title</div> <br/> <input class="input" type="text" name="title" required> <br>
-                    
+                <div class="title">Title</div> <br/> <input class="input" type="text" name="title" required> <br/>     
                	<div class="createButton">
                 	<input type="submit" value="Create Album" class="newElementButton"> <br/>
-
             	</div>
-            </form>
-            
-            
-
-        </div>
-              
-
-    
-</body>
+            </form>  
+        </div> 
+        </div>   
+	</body>
 </html>

@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #eee;
+    --secondary-color: #6111ff;
+    --link-color: #6111ff;
+    --grey-shade: #616161;
+}
+
 * {
     font-family: "Roboto", sans-serif;
     font-size: 100;
@@ -13,11 +20,16 @@
     font-size: 22px;
     padding: 1rem 0 1rem;
     border-radius: 15px;
-    width: 80%;
+    width: 100%;
     margin: 0;
     margin-top: 30px;
     cursor: pointer;
     transition: all 0.15s ease-in;
+}
+
+.form_content_inner{
+	width: 80%;
+	margin: 10%;
 }
   
 .newElementButton:hover {
@@ -26,14 +38,14 @@
 }
   
 h1 {
-    font-size: 40px;
-    margin-top: 0;
+    margin: 0;
+    padding-top: 20px;
     text-align: center;
-    padding-bottom: 40px;
+    font-size: 28px;
+    font-weight: bold;
 }
   
 .formContent {
-    text-align: center;
     width: 50%;
     background-color: white;
     padding: 10px;
@@ -49,7 +61,8 @@ h1 {
   .input {
     border: none;
     border-bottom: 2px solid #616161;
-    width: 80%;
+    width: 100%;
+    font-size: 20px; 
   }
 
   body {
@@ -62,19 +75,16 @@ h1 {
     border: none;
     border-bottom: 2px solid #616161;
     transition: all 0.15s ease-in;
+    outline: none;
   }
 
   .title {
-    font-size: 24px;
-    font-weight: bold;
-
+    font-size: 20px;
   }
 
-
-  
-
   @media screen and (max-width: 1000px) {
-    .column {
+    .formContent {
       width: 100%;
+      margin: 0;
     }
   }

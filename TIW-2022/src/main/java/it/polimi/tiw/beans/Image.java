@@ -6,15 +6,17 @@ public class Image {
 	private int idImage;
 	private int idUser;
 	private int idAlbum;
+	private String title;
 	private String description;
 	private Date date;
 	private String path;
 	
 	
-	public Image(int idImage, int idUser, int idAlbum, String description, Date date, String path) {
+	public Image(int idImage, int idUser, int idAlbum, String title, String description, Date date, String path) {
 		this.idImage = idImage;
 		this.idUser = idUser;
 		this.idAlbum = idAlbum;
+		this.title = title;
 		this.description = description;
 		this.date = date;
 		this.path = path;
@@ -48,6 +50,16 @@ public class Image {
 
 	public void setIdAlbum(int idAlbum) {
 		this.idAlbum = idAlbum;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 
