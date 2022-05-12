@@ -1,3 +1,11 @@
+:root{
+  --primary-color: #eee;
+  --secondary-color: #6D7AE0;
+  --grey-shade: #616161;
+  --link-color: #e690d9;
+}
+
+
 * {
   margin: 0px;
   padding: 0px;
@@ -6,6 +14,9 @@
   font-weight: 300;
 }
 
+a{
+	text-decoration: none;
+}
 
 .albumList-table {
   border-collapse: collapse;
@@ -13,7 +24,7 @@
   min-width: 400px;
   width: 100%;
   border: 1px solid;
-  border: #6D7AE0;
+  border: var(--secondary-color);
   border-radius: 20px 20px 20px 20px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -24,11 +35,10 @@
 }
 
 .albumList-table thead tr {
-  background-color: #6D7AE0;
+  background-color: var(--secondary-color);
   color: #ffffff;
   text-align: left;
 }
-
 
 
 .albumList-table th, td {
@@ -40,7 +50,6 @@
 .albumList-table tbody tr:nth-child(even) {
   background-color: #E5E5E5;
 }
-
 
 
 .album {
@@ -76,13 +85,12 @@ h2 {
 }
 
 
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 100px;
-  background-color: #6D7AE0;
+  background-color: var(--secondary-color);
 
 }
 
@@ -108,31 +116,25 @@ img {
 
 .logo:hover {
   background-color: white;
-  color: #6D7AE0;
+  color: var(--secondary-color);
   border-radius: 100px 100px 100px 100px;
   border: 1px solid;
   
 }
 
 .logout {
-
   margin-right: 100px;
   text-transform: uppercase;
-
-  color: #6D7AE0;
+  color: var(--secondary-color);
+  font-weight: 400;
   text-decoration: none;
   background-color: white;
   letter-spacing: 2px;
-
-
   padding: 9px 25px;
   border: 1px solid;
   cursor: pointer;
   border-radius: 20px 20px 20px 20px;
-
   transition: 0.5s;
-
-
 }
 
 .logout:hover {
@@ -145,6 +147,22 @@ img {
 	width:50%;
 	margin: 0 25%;
 	text-align: center;
+}
+
+.open_album_btn{
+  color: var(--link-color);
+  font-weight: 400;
+  border: 2px solid var(--link-color);
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+}
+
+.open_album_btn:hover{
+  color: var(--primary-color);
+  background-color: var(--link-color);
+  transition: 0.1s all ease-in;
 }
 
 
@@ -162,7 +180,7 @@ img {
   text-decoration: none;
   cursor: pointer;
   transition-duration: 0.5s;
-  background-color: #6D7AE0;
+  background-color: var(--secondary-color);
   -webkit-transition-duration: 0.4s; /* Safari */
 }
 
@@ -183,11 +201,11 @@ img {
   height: 100%;
   opacity: 0;
   transition: all 0.5s;
-  box-shadow: 0 0 10px 40px #6D7AE0;
+  box-shadow: 0 0 10px 40px var(--secondary-color);
 }
 
 .createAlbum:active:after {
-  box-shadow: 0 0 0 0 #6D7AE0;
+  box-shadow: 0 0 0 0 var(--secondary-color);
   position: absolute;
   border-radius: 4em;
   left: 0;

@@ -8,46 +8,41 @@
         <link rel="stylesheet" href="./css/homepage_style.css">
         <title>Home Page</title>
     </head>
-
     <body>
         <header>
             <a class="logo" href="GetHomePage">Home Page</a>
             
             <a class="logout" href="Logout">Logout</a>            
-        
-
         </header>
 
         <div class="album">
             <div class="albumTag">
                 <h2>Your Albums</h2>
-            </div>
+        </div>
             
-            <table class="albumList-table">
-                <thead class="table-head">
-                    <tr>
+        <table class="albumList-table">
+            <thead class="table-head">
+                <tr>
                         <th>Album Name</th>
                         <th>User</th>
                         <th>Creation Date</th>
+                        <th>Open album</th>
                     </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
                     <tr th:each="album : ${userAlbumList}">
-                        <td th:text="${album.getTitle()}">
-                            <a th:href="@{/GetAlbumPage(album=${album.getAlbumId()}, page=0)}">Cats Album</a>
-                        </td>
-                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getTitle()}">Cats Album</td>
+                        <td th:text="${album.getUserAlbum()}">Sample User</td>
                         <td th:text="${album.getCreationDate().toString().substring(0, 11)}">21/02/2022</td>
+                        <td><a class="open_album_btn" th:href="@{/GetAlbumPage(album=${album.getIdAlbum()}, page=0)}">SHOW</a></td>
                     </tr>
                     <tr>
                         <td>Casual Album</td>
                         <td th:text="${album.getIdUser()}">Sample User</td>
                         <td th:text="${album.getCreationDate().toString().substring(0, 11)}">22/02/2022</td>
                     </tr>
-                </tbody>
-                
-            </table>
-            
+                </tbody> 
+            </table> 
         </div>
 
         <div class="spaceNewAlbum">
@@ -58,25 +53,24 @@
 
         <div class="album">
             <div class="albumTag">
-                <h2>Albums from the community</h2>
-                
+                <h2>Albums from the community</h2>           
             </div>
-            
+
             <table class="albumList-table">
                 <thead class="table-head">
                     <tr>
                         <th>Album Name</th>
                         <th>User</th>
                         <th>Creation Date</th>
+                        <th>Open album</th>
                     </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
                     <tr th:each="album : ${otherUserAlbumList}">
-                        <td th:text="${album.getTitle()}">
-                            <a th:href="@{/GetAlbumPage(album=${album.getAlbumId()}, page=0)}">Cats Album</a>
-                        </td>
-                        <td th:text="${album.getIdUser()}">Sample User</td>
+                        <td th:text="${album.getTitle()}">Meow Album</td>
+                        <td th:text="${album.getUserAlbum()}">Sample User</td>
                         <td th:text="${album.getCreationDate().toString().substring(0, 11)}">21/02/2022</td>
+                        <td><a class="open_album_btn" th:href="@{/GetAlbumPage(album=${album.getIdAlbum()}, page=0)}">SHOW</a></td>
                     </tr>
                     <tr>
                         <td>Casual Album</td>

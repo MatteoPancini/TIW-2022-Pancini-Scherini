@@ -11,6 +11,8 @@ public class Image {
 	private Date date;
 	private String path;
 	
+	public Image() {}
+	
 	
 	public Image(int idImage, int idUser, int idAlbum, String title, String description, Date date, String path) {
 		this.idImage = idImage;

@@ -24,6 +24,8 @@
     <filter-name>UserChecker</filter-name> 
     <url-pattern>/GetHomePage</url-pattern> 
     <url-pattern>/PostAlbum</url-pattern> 
+    <url-pattern>/GetAlbumPage</url-pattern> 
+    <url-pattern>/PostImage</url-pattern> 
  </filter-mapping> 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

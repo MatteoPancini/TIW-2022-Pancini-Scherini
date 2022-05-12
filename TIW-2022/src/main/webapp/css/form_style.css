@@ -14,8 +14,8 @@
 }
 
 .newElementButton {
-    background-color: #6111ff;
-    color: #eee;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     border: 0;
     font-size: 22px;
     padding: 1rem 0 1rem;
@@ -60,7 +60,7 @@ h1 {
 
   .input {
     border: none;
-    border-bottom: 2px solid #616161;
+    border-bottom: 2px solid var(--grey-shade);
     width: 100%;
     font-size: 20px; 
   }
@@ -73,7 +73,7 @@ h1 {
 
   .input:focus {
     border: none;
-    border-bottom: 2px solid #616161;
+    border-bottom: 2px solid var(--grey-shade);
     transition: all 0.15s ease-in;
     outline: none;
   }

@@ -22,8 +22,7 @@ public class AlbumDAO {
   public List<Album> findUserAlbums(int idUser) throws SQLException {
     List<Album> userAlbumList = new ArrayList<Album>();
     
-    
-    String albumQuery = "SELECT * FROM album WHERE idUser = ? ORDER BY creationDate DESC";
+    String albumQuery = "SELECT idAlbum, album.idUser, title, creationDate, username FROM album JOIN user ON user.idUser=album.idUser WHERE album.idUser = ? ORDER BY creationDate DESC";
     
     ResultSet resultSet = null;
     PreparedStatement pstatement = null;
@@ -38,6 +37,7 @@ public class AlbumDAO {
           userAlbum.setIdUser(resultSet.getInt("idUser"));
           userAlbum.setTitle(resultSet.getString("title"));
           userAlbum.setCreationDate(new Date(resultSet.getDate("creationDate").getTime()));
+          userAlbum.setUserAlbum(resultSet.getString("username"));
           
           userAlbumList.add(userAlbum);
           
@@ -66,7 +66,7 @@ public class AlbumDAO {
     List<Album> userAlbumList = new ArrayList<Album>();
     
     
-    String albumQuery = "SELECT * FROM album WHERE idUser NOT IN (SELECT idUser FROM album WHERE idUser = ?) ORDER BY creationDate DESC";
+    String albumQuery = "SELECT idAlbum, album.idUser, title, creationDate, username FROM album JOIN user ON album.idUser=user.idUser WHERE album.idUser NOT IN (SELECT idUser FROM album WHERE idUser = ?) ORDER BY creationDate DESC";
     
     ResultSet resultSet = null;
     PreparedStatement pstatement = null;
@@ -81,6 +81,7 @@ public class AlbumDAO {
           userAlbum.setIdUser(resultSet.getInt("idUser"));
           userAlbum.setTitle(resultSet.getString("title"));
           userAlbum.setCreationDate(new Date(resultSet.getDate("creationDate").getTime()));
+          userAlbum.setUserAlbum(resultSet.getString("username"));
           
           userAlbumList.add(userAlbum);
           

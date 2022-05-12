@@ -8,6 +8,7 @@ public class Album {
 	private int idUser;
 	private String title;
 	private Date creationDate;
+	private String userAlbum;
 	
 	
 	
@@ -56,6 +57,14 @@ public class Album {
 		this.creationDate = creationDate;
 	}
 
+	public String getUserAlbum() {
+		return userAlbum;
+	}
 
+	public void setUserAlbum(String userAlbum) {
+		this.userAlbum = userAlbum;
+	}
+
+	
 	
 }
