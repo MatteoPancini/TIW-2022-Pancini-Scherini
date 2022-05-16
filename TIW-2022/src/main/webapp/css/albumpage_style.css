@@ -6,7 +6,7 @@
     font-weight: 300;
     --primary-color: #eee;
     --secondary-color: #6111ff;
-    --link-color: #6111ff;
+    --link-color: #e690d9;
     --grey-shade: #616161;
   }
   
@@ -140,6 +140,26 @@
   
   
   }
+  
+  a{
+  	text-decoration: none;
+  }
+  
+  .open_image_btn{
+  color: var(--link-color);
+  font-weight: 400;
+  border: 2px solid var(--link-color);
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+}
+
+.open_image_btn:hover{
+  color: var(--primary-color);
+  background-color: var(--link-color);
+  transition: 0.1s all ease-in;
+}
   
   .logout:hover {
     background-color: #e25b51;

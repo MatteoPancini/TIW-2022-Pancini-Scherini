@@ -23,11 +23,11 @@
         <table class="albumList-table">
             <thead class="table-head">
                 <tr>
-                        <th>Album Name</th>
-                        <th>User</th>
-                        <th>Creation Date</th>
-                        <th>Open album</th>
-                    </tr>
+                    <th>Album Name</th>
+                    <th>User</th>
+                    <th>Creation Date</th>
+                    <th>Open album</th>
+                </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
                     <tr th:each="album : ${userAlbumList}">

@@ -21,6 +21,7 @@
                 <tr>
                     <th>Image Title</th>
                     <th>Thumbnail</th>
+                    <th>Open Image</th>
                 </tr>
             </thead>
 
@@ -32,6 +33,7 @@
                     <td>
                         <img class="thumbnail" th:src="@{${'/img/privateImg/' + image.getPath()}}" width="120" alt="Can't load image :(">
                     </td>
+                    <td><a class="open_image_btn" th:href="@{/ShowImageDetails}">SHOW</a></td>
                 </tr>
                 <tr>
                     <td th:text="${image.getTitle()}">
@@ -75,8 +77,6 @@
                     <td th:text="${image.getTitle()}">
                         <a >Meow Image 6</a>
                     </td>
-
-
                     <td>
                         <img class="thumbnail" th:src="${i.getPath()}" alt="Can't load image :(">
                     </td>
@@ -94,16 +94,14 @@
             </div>
 
     </div>
-
     <div class="spaceNewImage">
         <a class="createImage" th:href="@{/PostImage(album=${album})}">
                 Add new Image
         </a>
     </div>
 
-
-
-
-
+	<div class="image_details_container" th:if="${(selectedImage!=null)}">
+		<img alt="" th:src="@{${'/img/privateImg' + selectedImage.getPath()}}">
+	</div>
 
 </body>
