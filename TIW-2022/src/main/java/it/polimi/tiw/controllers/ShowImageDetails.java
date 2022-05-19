@@ -19,7 +19,7 @@ import it.polimi.tiw.utils.TemplateEngineHandler;
 /**
  * Servlet implementation class ShowImage
  */
-@WebServlet("/ShowImage")
+@WebServlet("/ShowImageDetails")
 public class ShowImageDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -39,7 +39,9 @@ public class ShowImageDetails extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int imgID = Integer.parseInt(request.getParameter("image"));
-		String homePath = "/WEB-INF/albumpage.html";
+		String path = "/WEB-INF/albumpage.html";
+		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+	    templateEngine.process(path, webContext, response.getWriter());
 	}
 
 

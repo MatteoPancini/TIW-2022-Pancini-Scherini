@@ -11,11 +11,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.tiw.beans.Album;
 import it.polimi.tiw.beans.Image;
+import it.polimi.tiw.beans.User;
+import it.polimi.tiw.dao.AlbumDAO;
 import it.polimi.tiw.dao.ImageDAO;
 import it.polimi.tiw.utils.ConnectionHandler;
 import it.polimi.tiw.utils.TemplateEngineHandler;
@@ -45,6 +49,10 @@ public class GetAlbumPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int albumId = Integer.parseInt(request.getParameter("album"));
 		int pageId = Integer.parseInt(request.getParameter("page"));
+		
+		HttpSession session = request.getSession();
+
+		int userId = ((User) session.getAttribute("user")).getIdUser();
 
 		ImageDAO imageDAO = new ImageDAO(connection);
 		
@@ -58,10 +66,7 @@ public class GetAlbumPage extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unable to retrieve album images");
             return;
 		}
-		if(((pageId+1)*5)<albumImages.size() && request.getParameter("dir")!=null && request.getParameter("dir").equals("next")) 
-			pageId++;
-        else if(pageId>0 && request.getParameter("dir")!=null && request.getParameter("dir").equals("prev")) 
-        	pageId--;
+
         int firstImageId = pageId * 5;
         int lastImageId = firstImageId + 4;
         List<Image> imagesToShow;
@@ -72,17 +77,59 @@ public class GetAlbumPage extends HttpServlet {
             }
 
         }
-        redirect(request, response, pageId, albumImages, imagesToShow, albumId);
+        boolean sameUser = false;
+        
+        if(albumImages.size() != 0) {
+        	if(userId == albumImages.get(0).getIdUser())
+            	sameUser = true;
+
+        } else {
+        	sameUser = checkUserAlbums(userId, albumId);
+        }
+        	
+        redirect(request, response, pageId, albumImages, imagesToShow, albumId, sameUser);
     }
 	
 	
-	public void redirect(HttpServletRequest request, HttpServletResponse response, int pageId, List<Image>albumImages, List<Image>imagesToShow, int albumId) throws IOException {
-        WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+	public void redirect(HttpServletRequest request, HttpServletResponse response, int pageId, List<Image>albumImages, List<Image>imagesToShow, int albumId, boolean sameUser) throws IOException {
+
+		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
         webContext.setVariable("pageId", pageId);
         webContext.setVariable("imagesToShowList", imagesToShow);
         webContext.setVariable("imageFullList", albumImages);
         webContext.setVariable("album", albumId);
+        webContext.setVariable("showAddImage", sameUser);     
+        
+        
         String albumPath = "/WEB-INF/albumpage.html";
         templateEngine.process(albumPath, webContext, response.getWriter());
     }
+	
+	public boolean checkUserAlbums(int userId, int albumId) {
+		AlbumDAO albumDAO = new AlbumDAO(connection);
+		
+		List<Album> sessionUserAlbum = null;
+		
+		
+		try {
+			sessionUserAlbum = albumDAO.findUserAlbums(userId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(sessionUserAlbum == null)
+			return false;
+		else {
+			for(Album a : sessionUserAlbum) {
+				if(a.getIdAlbum() == albumId)
+					return true;
+			}
+
+		}
+		
+		return false;
+		
+		
+	}
 }

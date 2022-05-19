@@ -1,5 +1,6 @@
 package it.polimi.tiw.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -68,6 +69,7 @@ public class CreateAccount extends HttpServlet {
 		}
 		
 		System.out.println("New user email: "+email+" username: "+username+" isPswEquals: "+password.equals(confirmedPassword));
+	
 				
 		UserDAO userDAO = new UserDAO(connection);
 		try {
@@ -87,6 +89,21 @@ public class CreateAccount extends HttpServlet {
 			
 			// Third create new User
 			userDAO.createUser(email, username, password);
+			
+			int newUserId = userDAO.getIdFromUsername(username);
+			
+			//provo a creare una cartella in img
+			if(newUserId != -1) {
+				String folderPath = getServletContext().getInitParameter("folderPath");
+				File file = new File(folderPath + newUserId);
+				boolean bool = file.mkdir();
+			      if(bool){
+			         System.out.println("Directory created successfully");
+			      }else{
+			         System.out.println("Sorry couldn’t create specified directory");
+			      }
+			}
+			
 			String ctxpath = getServletContext().getContextPath();
 			String path = ctxpath + "/CheckLogin";
 			response.sendRedirect(path);

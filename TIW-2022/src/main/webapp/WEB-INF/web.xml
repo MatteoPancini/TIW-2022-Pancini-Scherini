@@ -16,6 +16,10 @@
     <param-name>dbDriver</param-name>
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
+  <context-param>
+  	<param-name>folderPath</param-name>
+  	<param-value>C:\Users\samue\Documents\TIW_img\u</param-value>
+  	</context-param>
   <filter> 
   	<filter-name>UserChecker</filter-name>
     <filter-class>it.polimi.tiw.filters.UserChecker</filter-class> 

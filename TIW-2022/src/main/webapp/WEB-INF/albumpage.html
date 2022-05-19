@@ -21,7 +21,6 @@
                 <tr>
                     <th>Image Title</th>
                     <th>Thumbnail</th>
-                    <th>Open Image</th>
                 </tr>
             </thead>
 
@@ -31,77 +30,27 @@
                         <a>Cats Image 1</a>
                     </td>
                     <td>
-                        <img class="thumbnail" th:src="@{${'/img/privateImg/' + image.getPath()}}" width="120" alt="Can't load image :(">
-                    </td>
-                    <td><a class="open_image_btn" th:href="@{/ShowImageDetails}">SHOW</a></td>
-                </tr>
-                <tr>
-                    <td th:text="${image.getTitle()}">
-                        <a >Meow Image 2</a>
-                    </td>
-                    <td>
-                        <img class="thumbnail" th:src="@{${'/img/privateImg' + i.getPath()}}" width="120" alt="Can't load image :(">
-                    </td>
-                </tr>
-                <tr>
-                    <td th:text="${image.getTitle()}">
-                        <a >Meow Image 3</a>
-                    </td>
-
-
-                    <td>
-                        <img class="thumbnail" th:src="${i.getPath()}" alt="Can't load image :(">
-                    </td>
-                </tr>
-                <tr>
-                    <td th:text="${image.getTitle()}">
-                        <a >Meow Image 5</a>
-                    </td>
-
-
-                    <td>
-                        <img class="thumbnail" th:src="${i.getPath()}" alt="Can't load image :(">
-                    </td>
-                </tr>
-                <tr>
-                    <td th:text="${image.getTitle()}">
-                        <a >Meow Image 5</a>
-                    </td>
-
-
-                    <td>
-                        <img class="thumbnail" th:src="${i.getPath()}" alt="Can't load image :(">
-                    </td>
-                </tr>
-                <tr>
-                    <td th:text="${image.getTitle()}">
-                        <a >Meow Image 6</a>
-                    </td>
-                    <td>
-                        <img class="thumbnail" th:src="${i.getPath()}" alt="Can't load image :(">
+                        <img class="thumbnail" th:src="@{/GetImage(fileName=${image.getPath()}, userId=${image.getIdUser()})}"  width="120" alt="Can't load image :(">
                     </td>
                 </tr>
             </tbody>
              </table>
             <div class="arrowsDiv">
-                <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}, dir='prev')}"
+                <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}-1, dir='prev')}"
                     th:class="${(imageFullList.size()>5 && pageId>0) ? 'leftArrow btn btn-primary' : 'hidden'}"
                         th:text="${imageFullList.size()>5 ? 'Prev' : ''}"></a>
-                <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}, dir='next')}"
+                <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}+1, dir='next')}"
                    th:class="${(imageFullList.size()>5 && pageId<imageFullList.size()/3 - 1) ? 'rightArrow btn btn-primary' : 'hidden'}"
-                        th:text="${imageFullList.size()>5 ? 'Next' : ''}"></a>
+                        th:text="${imagesToShowList.size()==5 ? 'Next' : ''}"></a>
                 <div class="clear"></div>
             </div>
 
     </div>
+
     <div class="spaceNewImage">
-        <a class="createImage" th:href="@{/PostImage(album=${album})}">
+        <a class="createImage" th:if="${showAddImage}" th:href="@{/PostImage(album=${album})}">
                 Add new Image
         </a>
     </div>
-
-	<div class="image_details_container" th:if="${(selectedImage!=null)}">
-		<img alt="" th:src="@{${'/img/privateImg' + selectedImage.getPath()}}">
-	</div>
-
 </body>
+</html>

@@ -14,13 +14,13 @@
         <div class="formContent">
             <h1>Add new Image</h1>
             <div class="form_content_inner">
-            <form th:action="PostImage" method="POST">
+            <form th:action="PostImage" method="POST" enctype="multipart/form-data">
                 <div class="form-title">Title</div> <br/> <input class="input" type="text" name="title" required> <br>
                 <br/>
                 <div class="form-title">Description</div>  <br/> <input class="input" type="text" name="description" required> <br>
                 <br/>
                 <div class="form-title">Image <br/>
-                    <input class="inputFile" type="file" name="path" accept=".png, .jpg">
+                    <input class="inputFile" type="file" name="file" accept=".png, .jpg">
                 </div>
                 <div class="createButton">
                     <input type="submit" value="Add Image" class="newElementButton"> <br/>   

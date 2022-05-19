@@ -18,7 +18,7 @@ public class UserDAO {
 	
 	public User checkLoginCredentials(String username, String psw) throws SQLException {
 		
-		String userCheckQuery = "SELECT  idUser, username, email FROM user  WHERE username = ? AND password =?";
+		String userCheckQuery = "SELECT idUser, username, email FROM user  WHERE username = ? AND password =?";
 		
 		try {
 			PreparedStatement pstatement = connection.prepareStatement(userCheckQuery);
@@ -60,14 +60,41 @@ public class UserDAO {
 		return usernameList;
 	}
 	
-	public void createUser(String email, String username, String psw) throws SQLException{
+	public void createUser(String email, String username, String psw) throws SQLException {
 		String query = "INSERT INTO dbfinalproject.user (email, username, password) VALUES(?, ?, ?)";
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query);){
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, username);
 			preparedStatement.setString(3, psw);
 			preparedStatement.executeUpdate();
 		}
+	}
+	
+	
+	public int getIdFromUsername(String username) throws SQLException {
+		
+		String query = "SELECT idUser FROM user WHERE username = ?";
+		
+	    
+		try {
+			PreparedStatement pstatement = connection.prepareStatement(query);
+			pstatement.setString(1, username);
+			try (ResultSet result = pstatement.executeQuery();) {
+				if (!result.isBeforeFirst()) // no results, credential check failed
+					return -1;
+				else {
+					result.next();
+					int userId = result.getInt("idUser");
+					return userId;
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			}
+		return -1;
+		
+		
+		
 	}
 	
 }

@@ -2,11 +2,19 @@ package it.polimi.tiw.beans;
 
 public class Comment {
 	
+
 	private int idComment;
 	private int idImage;
 	private int idAlbum;
 	private int idUser;
 	private String text;
+	
+	
+	public Comment() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 	
 	public Comment(int idComment, int idImage, int idAlbum, int idUser, String text) {
