@@ -21,6 +21,7 @@
                 <tr>
                     <th>Image Title</th>
                     <th>Thumbnail</th>
+                    <th>Open image</th>
                 </tr>
             </thead>
 
@@ -31,6 +32,9 @@
                     </td>
                     <td>
                         <img class="thumbnail" th:src="@{/GetImage(fileName=${image.getPath()}, userId=${image.getIdUser()})}"  width="120" alt="Can't load image :(">
+                    </td>
+                    <td class="open_image_btn">
+                        <a href="#">SHOW</a>
                     </td>
                 </tr>
             </tbody>
@@ -44,13 +48,12 @@
                         th:text="${imagesToShowList.size()==5 ? 'Next' : ''}"></a>
                 <div class="clear"></div>
             </div>
-
     </div>
-
     <div class="spaceNewImage">
         <a class="createImage" th:if="${showAddImage}" th:href="@{/PostImage(album=${album})}">
                 Add new Image
         </a>
     </div>
+    
 </body>
 </html>
