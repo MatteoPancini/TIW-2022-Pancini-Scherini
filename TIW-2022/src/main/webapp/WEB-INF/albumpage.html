@@ -37,10 +37,10 @@
              </table>
             <div class="arrowsDiv">
                 <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}-1, dir='prev')}"
-                    th:class="${(imageFullList.size()>5 && pageId>0) ? 'leftArrow btn btn-primary' : 'hidden'}"
+                    th:class="${(imageFullList.size()>5 && pageId>0) ? 'leftArrow' : 'hidden'}"
                         th:text="${imageFullList.size()>5 ? 'Prev' : ''}"></a>
                 <a th:href="@{/GetAlbumPage(album=${#request.getParameter('album')}, page=${pageId}+1, dir='next')}"
-                   th:class="${(imageFullList.size()>5 && pageId<imageFullList.size()/3 - 1) ? 'rightArrow btn btn-primary' : 'hidden'}"
+                   th:class="${(imageFullList.size()>5 && pageId<imageFullList.size()/3 - 1) ? 'rightArrow' : 'hidden'}"
                         th:text="${imagesToShowList.size()==5 ? 'Next' : ''}"></a>
                 <div class="clear"></div>
             </div>
