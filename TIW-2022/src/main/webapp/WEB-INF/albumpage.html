@@ -21,7 +21,6 @@
                 <tr>
                     <th>Image Title</th>
                     <th>Thumbnail</th>
-                    <th>Open image</th>
                 </tr>
             </thead>
 
@@ -31,10 +30,9 @@
                         <a>Cats Image 1</a>
                     </td>
                     <td>
+                    <a th:href="@{/ShowImageDetails(album=${#request.getParameter('album')}, image=${image.getIdImage})}">
                         <img class="thumbnail" th:src="@{/GetImage(fileName=${image.getPath()}, userId=${image.getIdUser()})}"  width="120" alt="Can't load image :(">
-                    </td>
-                    <td>
-                        <a class="open_image_btn" th:href="@{/ShowImageDetails(imageID=${image.getIdImage})}">SHOW</a>
+                   </a>
                     </td>
                 </tr>
             </tbody>
@@ -54,15 +52,22 @@
     <div class="main" th:if="${(imageDetails!=null)}">
     	<h1 class="title">Titolo: <span th:text="${imageDetails.getTitle()}"></span></h1>
     	<img class="selected_image" alt="can't load image" th:src="@{/GetImage(fileName=${imageDetails.getPath()}, userId=${imageDetails.getIdUser()})}"><br/>
-    	<h2 class="author"><span th:text="${imageDetails.getIdUser()}"></span></h2>
+    	<h2 class="author"><span th:text="${imageDetails.getUsername()}"></span></h2>
     	<h2 class="date"><span th:text="${imageDetails.getDate()}"></span></h2>
         <div class="comments_container">
-            <form class="comment_form"action="POST">
-                <textarea name="comment" id="" cols="30" rows="10"></textarea>
-                <input type="submit" value="send">
+            <form class="comment_form" action="PostComment" method="POST">
+            	<input type="hidden" name="image" th:value="${imageDetails.getIdImage()}"/>
+            	<input type="hidden" name="album" th:value="${imageDetails.getIdAlbum()}"/>
+            	<div class="comment_input">
+                	<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                	<input type="submit" value="send">
+                </div>
             </form>
-            <ul th:remove="all-but-first">
-                <li class="comment" th:each="comment : ${commentList}"><span th:text="${comment.getText()}"></span></li>
+            <ul class="comment_list" th:remove="all-but-first">
+                <li class="comment" th:each="comment : ${commentList}">
+                	<h4 th:text="${comment.getUsername()}"></h4>
+                	<span th:text="${comment.getText()}"></span>
+                </li>
             </ul>
         </div>
     </div>

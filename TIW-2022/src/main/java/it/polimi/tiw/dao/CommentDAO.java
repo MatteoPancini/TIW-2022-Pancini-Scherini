@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import it.polimi.tiw.beans.Comment;
@@ -24,7 +23,7 @@ public class CommentDAO {
         
         
         
-        String commentsQuery = "SELECT * FROM comment WHERE image = ?";
+        String commentsQuery = "SELECT idImage,idAlbum,comment.idUser,username,text FROM comment JOIN user ON user.idUser=comment.idUser WHERE idImage = ?";
         
         ResultSet resultSet = null;
         PreparedStatement pstatement = null;
@@ -33,7 +32,6 @@ public class CommentDAO {
         try {
         	pstatement = connection.prepareStatement(commentsQuery);
         	pstatement.setInt(1, idImage);
-        	pstatement.setInt(2, idAlbum);
         	resultSet = pstatement.executeQuery();
         	
         	while(resultSet.next()) {
@@ -43,6 +41,7 @@ public class CommentDAO {
         		imageComment.setIdAlbum(resultSet.getInt("idAlbum"));
         		imageComment.setIdUser(resultSet.getInt("idUser"));
         		imageComment.setText(resultSet.getString("text"));
+        		imageComment.setUsername(resultSet.getString("username"));
         		
         		imageComments.add(imageComment);
         	}

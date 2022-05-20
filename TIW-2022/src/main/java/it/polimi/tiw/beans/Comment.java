@@ -8,8 +8,20 @@ public class Comment {
 	private int idAlbum;
 	private int idUser;
 	private String text;
+	private String username;
 	
-	
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub

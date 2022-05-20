@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -46,7 +45,8 @@ public class ShowImageDetails extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int imgID = Integer.parseInt(request.getParameter("imageID"));
+		int imgID = Integer.parseInt(request.getParameter("image"));
+		int albumID = Integer.parseInt(request.getParameter("album"));
 		System.out.println(imgID);
 		List<Comment> comments = new ArrayList<>();
 		Image imgDetails = null;
@@ -54,12 +54,13 @@ public class ShowImageDetails extends HttpServlet {
 		CommentDAO commentDAO = new CommentDAO(connection);
 		try {
 			imgDetails = imageDAO.getImageFromId(imgID);
-			System.out.println("id: "+ imgDetails.getIdImage() + " title: "+imgDetails.getTitle());
+			comments.addAll(commentDAO.findAllComments(imgID, albumID));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		String path = "/WEB-INF/albumpage.html";
 		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
+		webContext.setVariable("commentList", comments);
 		webContext.setVariable("imageDetails", imgDetails);
 	    templateEngine.process(path, webContext, response.getWriter());
 	}

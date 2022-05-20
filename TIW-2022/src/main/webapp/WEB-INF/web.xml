@@ -30,6 +30,8 @@
     <url-pattern>/PostAlbum</url-pattern> 
     <url-pattern>/GetAlbumPage</url-pattern> 
     <url-pattern>/PostImage</url-pattern> 
+    <url-pattern>/ShowImageDetails</url-pattern> 
+    <url-pattern>/PostComment</url-pattern> 
  </filter-mapping> 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

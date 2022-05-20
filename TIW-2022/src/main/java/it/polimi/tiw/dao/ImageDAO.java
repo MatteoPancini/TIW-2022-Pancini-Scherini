@@ -64,7 +64,7 @@ public class ImageDAO {
 	public Image getImageFromId(int imageId) throws SQLException{
 		Image selectedImage = new Image();
 		
-		String query = "SELECT * FROM image WHERE idImage = ?";
+		String query = "SELECT idImage,image.idUser,idAlbum,title,description,date,path,username FROM image JOIN user ON image.idUSer=user.idUser WHERE idImage = ?";
 		
 		ResultSet resultSet = null;
         PreparedStatement pstatement = null;
@@ -81,6 +81,7 @@ public class ImageDAO {
         	selectedImage.setDescription(resultSet.getString("description"));
         	selectedImage.setDate(new Date(resultSet.getDate("date").getTime()));
         	selectedImage.setPath(resultSet.getString("path"));
+        	selectedImage.setUsername(resultSet.getString("username"));
         }catch(SQLException e) {
         	e.printStackTrace();
 
