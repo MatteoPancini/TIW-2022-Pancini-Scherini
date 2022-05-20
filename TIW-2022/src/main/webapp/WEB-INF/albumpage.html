@@ -12,7 +12,7 @@
         <a class="logout" href="Logout">Logout</a>            
     </header>
 
-    <div class="album">
+    <div class="album" th:if="${imageDetails==null}">
         <div class="albumTag">
             <h2></h2>
         </div>
@@ -33,8 +33,8 @@
                     <td>
                         <img class="thumbnail" th:src="@{/GetImage(fileName=${image.getPath()}, userId=${image.getIdUser()})}"  width="120" alt="Can't load image :(">
                     </td>
-                    <td class="open_image_btn">
-                        <a href="#">SHOW</a>
+                    <td>
+                        <a class="open_image_btn" th:href="@{/ShowImageDetails(imageID=${image.getIdImage})}">SHOW</a>
                     </td>
                 </tr>
             </tbody>
@@ -48,12 +48,23 @@
                         th:text="${imagesToShowList.size()==5 ? 'Next' : ''}"></a>
                 <div class="clear"></div>
             </div>
-    </div>
-    <div class="spaceNewImage">
-        <a class="createImage" th:if="${showAddImage}" th:href="@{/PostImage(album=${album})}">
-                Add new Image
-        </a>
+            
     </div>
     
+    <div class="main" th:if="${(imageDetails!=null)}">
+    	<h1 class="title">Titolo: <span th:text="${imageDetails.getTitle()}"></span></h1>
+    	<img class="selected_image" alt="can't load image" th:src="@{/GetImage(fileName=${imageDetails.getPath()}, userId=${imageDetails.getIdUser()})}"><br/>
+    	<h2 class="author"><span th:text="${imageDetails.getIdUser()}"></span></h2>
+    	<h2 class="date"><span th:text="${imageDetails.getDate()}"></span></h2>
+        <div class="comments_container">
+            <form class="comment_form"action="POST">
+                <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                <input type="submit" value="send">
+            </form>
+            <ul th:remove="all-but-first">
+                <li class="comment" th:each="comment : ${commentList}"><span th:text="${comment.getText()}"></span></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

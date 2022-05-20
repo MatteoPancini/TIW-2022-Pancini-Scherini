@@ -23,18 +23,12 @@ public class GetImage extends HttpServlet {
 	public void init() throws ServletException {
 		folderPath = getServletContext().getInitParameter("folderPath");
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public GetImage() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String fileName = request.getParameter("fileName");

@@ -92,11 +92,6 @@
   
   }
   
-  img {
-    text-align: center;
-    height: 30px;
-  }
-  
   .logo {
     cursor: pointer;
     color: white;
@@ -259,6 +254,16 @@
   top:0;
   opacity: 1;
   transition: 0s;
+}
+
+.main{
+	width: 80%;
+	display: "block";
+	margin: 5% 20%;
+}
+
+.selected_image{
+	size: "cover";
 }
 
   

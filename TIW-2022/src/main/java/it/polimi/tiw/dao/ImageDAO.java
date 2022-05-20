@@ -11,14 +11,12 @@ import java.util.List;
 import it.polimi.tiw.beans.Image;
 
 public class ImageDAO {
-	private Connection connection;
-	
+	private Connection connection;	
 	
 	public ImageDAO(Connection connection) {
         this.connection = connection;
     }
 	
-	//TODO: non va messo idUser ma idAlbum
 	public List<Image> findAllAlbumImages(int idAlbum) throws SQLException {
 		List<Image> albumImagesList = new ArrayList<>();
 		
@@ -34,7 +32,7 @@ public class ImageDAO {
         	
         	while(resultSet.next()) {
         		Image albumImage = new Image();
-        		
+        		albumImage.setIdImage(resultSet.getInt("idImage"));
         		albumImage.setIdUser(resultSet.getInt("idUser"));
         		albumImage.setIdAlbum(resultSet.getInt("idAlbum"));
         		albumImage.setTitle(resultSet.getString("title"));
@@ -62,6 +60,45 @@ public class ImageDAO {
           }
         return albumImagesList;
 	}
+	
+	public Image getImageFromId(int imageId) throws SQLException{
+		Image selectedImage = new Image();
+		
+		String query = "SELECT * FROM image WHERE idImage = ?";
+		
+		ResultSet resultSet = null;
+        PreparedStatement pstatement = null;
+        
+        try {
+        	pstatement = connection.prepareStatement(query);
+        	pstatement.setInt(1, imageId);
+        	resultSet = pstatement.executeQuery();
+        	resultSet.next();
+        	selectedImage.setIdImage(resultSet.getInt("idImage"));
+        	selectedImage.setIdUser(resultSet.getInt("idUser"));
+        	selectedImage.setIdAlbum(resultSet.getInt("idAlbum"));
+        	selectedImage.setTitle(resultSet.getString("title"));
+        	selectedImage.setDescription(resultSet.getString("description"));
+        	selectedImage.setDate(new Date(resultSet.getDate("date").getTime()));
+        	selectedImage.setPath(resultSet.getString("path"));
+        }catch(SQLException e) {
+        	e.printStackTrace();
+
+        } finally {
+              try {
+                resultSet.close();
+              } catch (Exception e1) {
+                throw new SQLException(e1);
+              }
+              try {
+                pstatement.close();
+              } catch (Exception e2) {
+                throw new SQLException(e2);
+              }
+        }
+        return selectedImage;
+	}
+	
 	
 	public void createNewImage(int idUser, int albumId, String imageTitle, String description, String imagePath) throws SQLException {
         String query = "INSERT INTO image (idUser, idAlbum, title, description, date, path) VALUES (?, ?, ?, ?, ?, ?)";
