@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="./css/albumpage_style.css" type="text/css">
     <meta charset="UTF-8">
     <title>Album page</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com"> 
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
 </head>
 
 <body th:width="i">
@@ -52,21 +55,23 @@
     <div class="main" th:if="${(imageDetails!=null)}">
     	<h1 class="title">Titolo: <span th:text="${imageDetails.getTitle()}"></span></h1>
     	<img class="selected_image" alt="can't load image" th:src="@{/GetImage(fileName=${imageDetails.getPath()}, userId=${imageDetails.getIdUser()})}"><br/>
-    	<h2 class="author"><span th:text="${imageDetails.getUsername()}"></span></h2>
-    	<h2 class="date"><span th:text="${imageDetails.getDate()}"></span></h2>
+    	<h2 class="title">user: <span th:text="${imageDetails.getUsername()}"></span></h2>
+    	<h2 class="title">creation date: <span th:text="${imageDetails.getDate()}"></span></h2>
+    	<h2 class="title">description:</h2> 
+    	<p class="description" th:text="${imageDetails.getDescription()}"><hr/></p>
         <div class="comments_container">
             <form class="comment_form" action="PostComment" method="POST">
             	<input type="hidden" name="image" th:value="${imageDetails.getIdImage()}"/>
             	<input type="hidden" name="album" th:value="${imageDetails.getIdAlbum()}"/>
             	<div class="comment_input">
-                	<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                	<textarea placeholder="write a new comment..." name="comment" id="comment"></textarea>
                 	<input type="submit" value="send">
                 </div>
             </form>
             <ul class="comment_list" th:remove="all-but-first">
                 <li class="comment" th:each="comment : ${commentList}">
                 	<h4 th:text="${comment.getUsername()}"></h4>
-                	<span th:text="${comment.getText()}"></span>
+                	<p th:text="${comment.getText()}"></p>
                 </li>
             </ul>
         </div>

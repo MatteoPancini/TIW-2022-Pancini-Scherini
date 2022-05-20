@@ -2,7 +2,6 @@
     margin: 0px;
     padding: 0px;
     font-family: "Roboto", sans-serif;
-    font-size: 100;
     font-weight: 300;
     --primary-color: #eee;
     --secondary-color: #6111ff;
@@ -36,7 +35,6 @@
   }
   
   
-  
   .albumList-table th, td {
     padding: 20px 0;
     text-align: center;
@@ -46,7 +44,6 @@
   .albumList-table tbody tr:nth-child(even) {
     background-color: #E5E5E5;
   }
-  
   
   
   .album {
@@ -119,21 +116,16 @@
   
     margin-right: 100px;
     text-transform: uppercase;
-  
+    font-weight: 400;
     color: #6D7AE0;
     text-decoration: none;
     background-color: white;
     letter-spacing: 2px;
-  
-  
     padding: 9px 25px;
     border: 1px solid;
     cursor: pointer;
     border-radius: 20px 20px 20px 20px;
-  
     transition: 0.5s;
-  
-  
   }
   
   a{
@@ -162,12 +154,11 @@
   }
   
   
-  .spaceNewAlbum{
-      width:50%;
-      margin: 0 25%;
-      text-align: center;
-  }
-  
+.spaceNewAlbum{
+  width:50%;
+  margin: 0 25%;
+  text-align: center;
+}
   
 .thumbnail {
     width: 200px;
@@ -177,7 +168,6 @@
 .arrowsDiv {
     width: 100%;
 }
-
 
 .arrowsDiv .leftArrow {
     float: left;
@@ -207,7 +197,6 @@
 	margin-bottom: 60px;
 
 }
-
 
 .createImage {
   position: relative;
@@ -259,14 +248,83 @@
 .main{
 	width: 80%;
 	display: "block";
-	margin: 5% 20%;
+	margin: 5% 10%;
+}
+
+.title{
+  margin-bottom: 20px;
+  font-size:26px;
+  font-weight: 500;
 }
 
 .selected_image{
 	size: "cover";
+  max-width: 1000px;
 }
 
+.description{
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+hr{
+	margin-bottom: 40px;
+	color: #d2d2d2;
+}
+.comment_input{
+  display: flex;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 15px;
+}
+
+.comment_input textarea{
+  width: 100%;
+  padding: 5px;
+  background-color: #f0f0f0;
+  border: 0px;
+  resize: none;
   
+}
+
+.comment_input textarea:focus{
+  outline: none;
+}
+
+.comment_input input{
+  padding: 0px 40px;
+  background-color: #6D7AE0;
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.comment_list{
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.comment{
+  background-color: #F0F0F0;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.comment h4{
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.comment p{
+  padding: 5px 50px 20px 10px;
+}
+
   
   @media screen and (max-width: 1000px) {
   

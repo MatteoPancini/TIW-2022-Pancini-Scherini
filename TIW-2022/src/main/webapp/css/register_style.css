@@ -71,6 +71,11 @@ h1{
     transition: all 0.15s ease-in;
 }
 
+.register_error {
+	color: red;
+    font-size: 0.8rem;
+}
+
 @media screen and (max-width: 1000px) {
     .register_form_section {
         height: 100%;

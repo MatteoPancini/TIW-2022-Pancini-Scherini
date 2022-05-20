@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,16 +76,22 @@ public class CreateAccount extends HttpServlet {
 		try {
 			// First check if the password and confirmed password are equals
 			if(!password.equals(confirmedPassword)) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Confirmed password is wrong");
-				return;
+				ServletContext servletContext = getServletContext();
+				final WebContext webcontext = new WebContext(request, response, servletContext, request.getLocale());
+				webcontext.setVariable("errorMsg", "Password fields don't match");
+				String path = "/WEB-INF/register.html";
+				templateEngine.process(path, webcontext, response.getWriter());
 			}
 			
 			// Second check if username is not in the DB
 			List<String> usernameList = userDAO.findAllUsernames();
 			
 			if(usernameList.contains(username)) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Username already exists");
-				return;
+				ServletContext servletContext = getServletContext();
+				final WebContext webcontext = new WebContext(request, response, servletContext, request.getLocale());
+				webcontext.setVariable("errorMsg", "Username already in use");
+				String path = "/WEB-INF/register.html";
+				templateEngine.process(path, webcontext, response.getWriter());
 			}
 			
 			// Third create new User
@@ -100,7 +107,7 @@ public class CreateAccount extends HttpServlet {
 			      if(bool){
 			         System.out.println("Directory created successfully");
 			      }else{
-			         System.out.println("Sorry couldn’t create specified directory");
+			         System.out.println("Sorry couldnï¿½t create specified directory");
 			      }
 			}
 			
