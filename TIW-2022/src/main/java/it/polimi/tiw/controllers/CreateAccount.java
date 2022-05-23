@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -94,7 +97,16 @@ public class CreateAccount extends HttpServlet {
 				templateEngine.process(path, webcontext, response.getWriter());
 			}
 			
-			// Third create new User
+			// Third check email validity structure
+			if(!mailSyntaxCheck(email)) {
+				ServletContext servletContext = getServletContext();
+				final WebContext webcontext = new WebContext(request, response, servletContext, request.getLocale());
+				webcontext.setVariable("errorMsg", "email pattern does not exists");
+				String path = "/WEB-INF/register.html";
+				templateEngine.process(path, webcontext, response.getWriter());
+			}
+			
+			// Fourth create new User
 			userDAO.createUser(email, username, password);
 			
 			int newUserId = userDAO.getIdFromUsername(username);
@@ -132,5 +144,33 @@ public class CreateAccount extends HttpServlet {
 			}
 		}
 	}
+	
+	private boolean mailSyntaxCheck(String email)
+	   {
+	        // Create the Pattern using the regex
+	        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+	 
+	        // Match the given string with the pattern
+	        Matcher m = p.matcher(email);
+	 
+	        // check whether match is found
+	        boolean matchFound = m.matches();
+	 
+	        StringTokenizer st = new StringTokenizer(email, ".");
+	        String lastToken = null;
+	        while (st.hasMoreTokens()) {
+	            lastToken = st.nextToken();
+	        }
+	 
+	    // validate the country code
+	        if (matchFound && lastToken.length() >= 2
+	                && email.length() - 1 != lastToken.length()) {
+	 
+	            return true;
+	        } else {
+	            return false;
+	        }
+	 
+	    }
 
 }

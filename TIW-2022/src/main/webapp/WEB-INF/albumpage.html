@@ -49,7 +49,11 @@
                         th:text="${imagesToShowList.size()==5 ? 'Next' : ''}"></a>
                 <div class="clear"></div>
             </div>
-            
+       	<div class="spaceNewImage" th:if="${showAddImage}">
+        <a class="createImage" th:href="@{/PostImage(album=${album})}">
+                Add new Image
+        </a>
+    	</div>
     </div>
     
     <div class="main" th:if="${(imageDetails!=null)}">
@@ -75,6 +79,7 @@
                 </li>
             </ul>
         </div>
+        <p class="backAlbumButton">Back to <a th:href="@{/GetAlbumPage(album=${imageDetails.getIdAlbum()}, page=0)}">Album Page</a></p>
     </div>
 </body>
 </html>
