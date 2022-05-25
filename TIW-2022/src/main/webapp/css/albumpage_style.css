@@ -292,7 +292,7 @@ hr{
   outline: none;
 }
 
-.comment_input input{
+.send_comment_btn{
   padding: 0px 40px;
   background-color: #6D7AE0;
   color: white;
@@ -300,6 +300,14 @@ hr{
   border: 0px;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.2s ease-in all;
+  
+}
+
+.send_comment_btn:hover{
+	background-color: #af0dfd;
+	transition: 0.2s ease-in all;
+	
 }
 
 .comment_list{

@@ -74,9 +74,12 @@ public class CreateAccount extends HttpServlet {
 		
 		System.out.println("New user email: "+email+" username: "+username+" isPswEquals: "+password.equals(confirmedPassword));
 	
+		boolean invalidUser = false;
 				
 		UserDAO userDAO = new UserDAO(connection);
 		try {
+			List<String> usernameList = userDAO.findAllUsernames();
+
 			// First check if the password and confirmed password are equals
 			if(!password.equals(confirmedPassword)) {
 				ServletContext servletContext = getServletContext();
@@ -84,48 +87,51 @@ public class CreateAccount extends HttpServlet {
 				webcontext.setVariable("errorMsg", "Password fields don't match");
 				String path = "/WEB-INF/register.html";
 				templateEngine.process(path, webcontext, response.getWriter());
+				invalidUser = true;
 			}
-			
-			// Second check if username is not in the DB
-			List<String> usernameList = userDAO.findAllUsernames();
-			
-			if(usernameList.contains(username)) {
+			else if(usernameList.contains(username)) {
+				// Second check if username is not in the DB
 				ServletContext servletContext = getServletContext();
 				final WebContext webcontext = new WebContext(request, response, servletContext, request.getLocale());
 				webcontext.setVariable("errorMsg", "Username already in use");
 				String path = "/WEB-INF/register.html";
 				templateEngine.process(path, webcontext, response.getWriter());
+				invalidUser = true;
+
 			}
-			
-			// Third check email validity structure
-			if(!mailSyntaxCheck(email)) {
+			else if(!mailSyntaxCheck(email)) {
+				// Third check email validity structure
 				ServletContext servletContext = getServletContext();
 				final WebContext webcontext = new WebContext(request, response, servletContext, request.getLocale());
 				webcontext.setVariable("errorMsg", "email pattern does not exists");
 				String path = "/WEB-INF/register.html";
 				templateEngine.process(path, webcontext, response.getWriter());
+				invalidUser = true;
 			}
 			
-			// Fourth create new User
-			userDAO.createUser(email, username, password);
+			if(!invalidUser) {
 			
-			int newUserId = userDAO.getIdFromUsername(username);
-			
-			//provo a creare una cartella in img
-			if(newUserId != -1) {
-				String folderPath = getServletContext().getInitParameter("folderPath");
-				File file = new File(folderPath + newUserId);
-				boolean bool = file.mkdir();
-			      if(bool){
-			         System.out.println("Directory created successfully");
-			      }else{
-			         System.out.println("Sorry couldn�t create specified directory");
-			      }
+				// Fourth create new User
+				userDAO.createUser(email, username, password);
+				
+				int newUserId = userDAO.getIdFromUsername(username);
+				
+				//provo a creare una cartella in img
+				if(newUserId != 0) {
+					String folderPath = getServletContext().getInitParameter("folderPath");
+					File file = new File(folderPath + newUserId);
+					boolean bool = file.mkdir();
+				      if(bool){
+				         System.out.println("Directory created successfully");
+				      }else{
+				         System.out.println("Sorry couldn t create specified directory");
+				      }
+				}
+				
+				String ctxpath = getServletContext().getContextPath();
+				String path = ctxpath + "/CheckLogin";
+				response.sendRedirect(path);
 			}
-			
-			String ctxpath = getServletContext().getContextPath();
-			String path = ctxpath + "/CheckLogin";
-			response.sendRedirect(path);
 			
 		} catch (SQLException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error in creating the product in the database");
