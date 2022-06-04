@@ -1,13 +1,13 @@
 package it.polimi.tiw.beans;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Album {
 	
 	private int idAlbum;
 	private int idUser;
 	private String title;
-	private Date creationDate;
+	private LocalDateTime creationDate;
 	private String userAlbum;
 	
 	
@@ -17,7 +17,7 @@ public class Album {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Album(int idAlbum, int idUser, String title, Date creationDate) {
+	public Album(int idAlbum, int idUser, String title, LocalDateTime creationDate) {
 		super();
 		this.idAlbum = idAlbum;
 		this.idUser = idUser;
@@ -49,11 +49,11 @@ public class Album {
 		this.title = title;
 	}
 
-	public Date getCreationDate() {
+	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
 
