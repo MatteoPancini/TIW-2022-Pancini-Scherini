@@ -107,7 +107,10 @@ public class ImageDAO {
 	
 	
 	public void createNewImage(int idUser, int albumId, String imageTitle, String description, String imagePath) throws SQLException {
-        String query = "INSERT INTO image (idUser, idAlbum, title, description, date, path) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO image (idUser, idAlbum, title, description, date, path, orderNum) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        int orderNum = findLastId() +1;
+        
         try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idUser);
             preparedStatement.setInt(2, albumId);
@@ -115,8 +118,41 @@ public class ImageDAO {
             preparedStatement.setString(4, description);
             preparedStatement.setObject(5, new java.sql.Timestamp(new Date().getTime()));
             preparedStatement.setString(6, imagePath);
+            preparedStatement.setInt(7, orderNum);
             preparedStatement.executeUpdate();
         }
     }
+	
+private int findLastId() throws SQLException{
+		
+		ResultSet resultSet = null;
+        PreparedStatement pstatement = null;
+        int res=0;
+		
+		String query = "SELECT idImage FROM image ORDER BY idImage DESC LIMIT 1";
+		 try {
+	        	pstatement = connection.prepareStatement(query);
+	        	resultSet = pstatement.executeQuery();
+	        	resultSet.next();
+	        	res = resultSet.getInt("idImage");
+	        	return res;
+	        	
+		 }catch(SQLException e) {
+			 e.printStackTrace();
+		 }
+		 finally {
+             try {
+               resultSet.close();
+             } catch (Exception e1) {
+               throw new SQLException(e1);
+             }
+             try {
+               pstatement.close();
+             } catch (Exception e2) {
+               throw new SQLException(e2);
+             }
+		 }
+		return res;
+	}
 
 }

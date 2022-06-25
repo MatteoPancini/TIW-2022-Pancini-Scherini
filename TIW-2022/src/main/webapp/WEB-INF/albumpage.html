@@ -66,7 +66,6 @@
         <div class="comments_container">
             <form class="comment_form" action="PostComment" method="POST">
             	<input type="hidden" name="image" th:value="${imageDetails.getIdImage()}"/>
-            	<input type="hidden" name="album" th:value="${imageDetails.getIdAlbum()}"/>
             	<div class="comment_input">
                 	<textarea placeholder="write a new comment..." name="comment" id="comment"></textarea>
                 	<input type="submit" class="send_comment_btn" value="send">

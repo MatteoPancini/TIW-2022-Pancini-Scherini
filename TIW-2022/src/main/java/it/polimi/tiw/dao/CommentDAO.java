@@ -17,13 +17,13 @@ public class CommentDAO {
         this.connection = connection;
     }
     
-    public List<Comment> findAllComments(int idImage, int idAlbum) throws SQLException {
+    public List<Comment> findAllComments(int idImage) throws SQLException {
     	
         List<Comment> imageComments = new ArrayList<>();
         
         
         
-        String commentsQuery = "SELECT idImage,idAlbum,comment.idUser,username,text FROM comment JOIN user ON user.idUser=comment.idUser WHERE idImage = ?";
+        String commentsQuery = "SELECT idImage,comment.idUser,username,text FROM comment JOIN user ON user.idUser=comment.idUser WHERE idImage = ?";
         
         ResultSet resultSet = null;
         PreparedStatement pstatement = null;
@@ -38,7 +38,6 @@ public class CommentDAO {
         		Comment imageComment = new Comment();
         		
         		imageComment.setIdImage(resultSet.getInt("idImage"));
-        		imageComment.setIdAlbum(resultSet.getInt("idAlbum"));
         		imageComment.setIdUser(resultSet.getInt("idUser"));
         		imageComment.setText(resultSet.getString("text"));
         		imageComment.setUsername(resultSet.getString("username"));
@@ -66,13 +65,12 @@ public class CommentDAO {
     }
     
     
-    public void createNewComment(int idImage, int idAlbum, int idUser, String text) throws SQLException {
-    	String query = "INSERT INTO comment(idImage, idAlbum, idUser, text) VALUES (?, ?, ?, ?)";
+    public void createNewComment(int idImage, int idUser, String text) throws SQLException {
+    	String query = "INSERT INTO comment(idImage, idUser, text) VALUES (?, ?, ?)";
     	try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idImage);
-            preparedStatement.setInt(2, idAlbum);
-            preparedStatement.setInt(3, idUser);
-            preparedStatement.setString(4, text);
+            preparedStatement.setInt(2, idUser);
+            preparedStatement.setString(3, text);
             
             preparedStatement.executeUpdate();
         }

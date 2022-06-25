@@ -46,7 +46,6 @@ public class ShowImageDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int imgID = Integer.parseInt(request.getParameter("image"));
-		int albumID = Integer.parseInt(request.getParameter("album"));
 		System.out.println(imgID);
 		List<Comment> comments = new ArrayList<>();
 		Image imgDetails = null;
@@ -54,7 +53,7 @@ public class ShowImageDetails extends HttpServlet {
 		CommentDAO commentDAO = new CommentDAO(connection);
 		try {
 			imgDetails = imageDAO.getImageFromId(imgID);
-			comments.addAll(commentDAO.findAllComments(imgID, albumID));
+			comments.addAll(commentDAO.findAllComments(imgID));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

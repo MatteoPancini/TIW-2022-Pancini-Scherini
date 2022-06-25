@@ -54,7 +54,6 @@ public class PostComment extends HttpServlet {
         
         try {
         	imgID = Integer.parseInt(request.getParameter("image"));
-    		albumID = Integer.parseInt(request.getParameter("album"));
         	comment = StringEscapeUtils.escapeJava(request.getParameter("comment"));
         	// regex pattern to replace \r\n in comments
         	comment = comment.replaceAll("(\\\\r\\\\n|\\\\n)", "\\\n");
@@ -70,7 +69,7 @@ public class PostComment extends HttpServlet {
         
         CommentDAO commentDAO = new CommentDAO(connection);
         try {
-			commentDAO.createNewComment(imgID, albumID, userId, finalComment);
+			commentDAO.createNewComment(imgID, userId, finalComment);
 			System.out.println(finalComment);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
