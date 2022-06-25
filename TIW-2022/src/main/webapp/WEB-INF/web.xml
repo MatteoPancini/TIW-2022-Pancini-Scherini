@@ -32,6 +32,7 @@
     <url-pattern>/PostImage</url-pattern> 
     <url-pattern>/ShowImageDetails</url-pattern> 
     <url-pattern>/PostComment</url-pattern> 
+   <url-pattern>/GetImage</url-pattern>
  </filter-mapping> 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
