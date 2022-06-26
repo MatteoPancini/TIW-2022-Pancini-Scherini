@@ -33,7 +33,7 @@
                         <a>Cats Image 1</a>
                     </td>
                     <td>
-                    <a th:href="@{/ShowImageDetails(album=${#request.getParameter('album')}, image=${image.getIdImage})}">
+                    <a th:href="@{/ShowImageDetails(image=${image.getIdImage})}">
                         <img class="thumbnail" th:src="@{/GetImage(fileName=${image.getPath()}, userId=${image.getIdUser()})}"  width="120" alt="Can't load image :(">
                    </a>
                     </td>

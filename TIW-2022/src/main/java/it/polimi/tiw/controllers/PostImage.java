@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,9 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.tiw.beans.Album;
 import it.polimi.tiw.beans.User;
+import it.polimi.tiw.dao.AlbumDAO;
 import it.polimi.tiw.dao.ImageDAO;
 //import it.polimi.tiw.servlets.Exception;
 //import it.polimi.tiw.servlets.String;
@@ -68,8 +71,18 @@ public class PostImage extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("Arrivo alla GET");
+		
+		HttpSession session = request.getSession();
+        int userId = ((User) session.getAttribute("user")).getIdUser();
+        
 		this.albumId = Integer.parseInt(request.getParameter("album"));
 		System.out.println("leggo album: "+ albumId);
+		
+		if(!checkUserAlbums(userId, albumId)) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Not your album");
+			return;
+		}
+		
 		String path = "/WEB-INF/newimageform.html";
 		WebContext webContext = new WebContext(request, response, getServletContext(), request.getLocale());
 		webContext.setVariable("album", albumId);
@@ -139,6 +152,34 @@ public class PostImage extends HttpServlet {
         
 		response.sendRedirect(getServletContext().getContextPath() + "/GetAlbumPage?album=" + albumId + "&page=0");		
 
+		
+		
+	}
+	
+	public boolean checkUserAlbums(int userId, int albumId) {
+		AlbumDAO albumDAO = new AlbumDAO(connection);
+		
+		List<Album> sessionUserAlbum = null;
+		
+		
+		try {
+			sessionUserAlbum = albumDAO.findUserAlbums(userId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(sessionUserAlbum == null)
+			return false;
+		else {
+			for(Album a : sessionUserAlbum) {
+				if(a.getIdAlbum() == albumId)
+					return true;
+			}
+
+		}
+		
+		return false;
 		
 		
 	}

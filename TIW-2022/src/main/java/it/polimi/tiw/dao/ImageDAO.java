@@ -89,6 +89,7 @@ public class ImageDAO {
         	selectedImage.setUsername(resultSet.getString("username"));
         }catch(SQLException e) {
         	e.printStackTrace();
+        	return null;
 
         } finally {
               try {

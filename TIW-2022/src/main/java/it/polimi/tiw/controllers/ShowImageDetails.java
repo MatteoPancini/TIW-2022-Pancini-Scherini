@@ -53,6 +53,10 @@ public class ShowImageDetails extends HttpServlet {
 		CommentDAO commentDAO = new CommentDAO(connection);
 		try {
 			imgDetails = imageDAO.getImageFromId(imgID);
+			if(imgDetails==null) {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Image not found");
+				return;
+			}
 			comments.addAll(commentDAO.findAllComments(imgID));
 		} catch (SQLException e) {
 			e.printStackTrace();

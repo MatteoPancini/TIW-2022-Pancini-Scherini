@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * Servlet implementation class GetImage
  */
@@ -31,7 +33,7 @@ public class GetImage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fileName = request.getParameter("fileName");
+		String fileName = StringEscapeUtils.escapeJava(request.getParameter("fileName"));
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		
 		String userFolderPath = folderPath + userId + "/";
