@@ -1,4 +1,4 @@
-# Image Gallery Web App
+# Image Gallery Web App - PureHTML Version
 
 The project consists of a web app that manages an image gallery.
 Every user can register, login, create a new album, upload an image on an album, write a comment below an image, see other's user images.
